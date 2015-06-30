@@ -32,3 +32,4 @@ SECURITY.md
 !core/server/email-templates/**
 bower_components/**
 .editorconfig
+scripts

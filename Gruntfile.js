@@ -621,20 +621,32 @@ var _              = require('lodash'),
         // `grunt validate` is one of the most important and useful grunt tasks that we have available to use. It
         // manages the build of your environment and then calls `grunt test`
         //
-        // `grunt validate` is called by `npm test` and is used by Travis.
+        // `grunt validate` is called by `npm test`.
         grunt.registerTask('validate', 'Run tests and lint code',
+            ['init', 'lint', 'test-all', 'test-functional']);
+
+        // ### Travis
+        // **Testing task for Travis CI**
+        //
+        // `grunt travis` will build, lint and test your local Ghost codebase.
+        //
+        // `grunt travis` manages the build of your environment and then runs 5 of the 6 tests.
+        // It doesn't run `test-functional` because this is only run by one job (see `travis.yml`).
+        //
+        // `grunt travis` is called by Travis CI for running test builds.
+        grunt.registerTask('travis', 'Run tests without functional and lint code',
             ['init', 'lint', 'test-all']);
 
         // ### Test-All
         // **Main testing task**
         //
-        // `grunt test-all` will lint and test your pre-built local Ghost codebase.
+        // `grunt test-all` will test your pre-built local Ghost codebase.
         //
-        // `grunt test-all` runs jshint and jscs as well as all 6 test suites. See the individual sub tasks below for
+        // `grunt test-all` runs 5 of the 6 test suites. See the individual sub tasks below for
         // details of each of the test suites.
         //
         grunt.registerTask('test-all', 'Run tests and lint code',
-            ['test-routes', 'test-module', 'test-unit', 'test-integration', 'test-ember', 'test-functional']);
+            ['test-routes', 'test-module', 'test-unit', 'test-integration', 'test-ember']);
 
         // ### Lint
         //
