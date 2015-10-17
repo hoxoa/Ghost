@@ -61,6 +61,9 @@ frontendRoutes = function frontendRoutes(middleware) {
 
     // Tags
     tagRouter.route('/').get(frontend.tag);
+    tagRouter.route('/edit?').get(function redirect(req, res) {
+        res.redirect(subdir + '/tag/' + req.params.slug + '/');
+    });
     tagRouter.route('/' + routeKeywords.page + '/:page/').get(frontend.tag);
     tagRouter.use(rssRouter);
 
